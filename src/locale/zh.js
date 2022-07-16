@@ -9088,7 +9088,7 @@ export default {
         textWrapMode: '换行方式',
         textRotate: '文本旋转',
         textRotateMode: '旋转方式',
-        freezeTopRow: '冻结首行',
+        freezeTopRow: '冻结第一行',
         sortAndFilter: '排序和筛选',
         findAndReplace: '查找替换',
         sum: '求和',
@@ -9483,16 +9483,18 @@ export default {
         "rotationDown":"向下90°"
     },
     freezen:{
-        default:"冻结首行",
-        freezenRow:"冻结首行",
-        freezenColumn:"冻结首列",
-        freezenRC:"冻结行列",
+        default:"冻结第一行",
+        freezenRow:"冻结第一行",
+        freezenColumn:"冻结第A列",
+        freezenRC:"冻结第一行第A列",
         freezenRowRange:"冻结行到选区",
         freezenColumnRange:"冻结列到选区",
         freezenRCRange:"冻结行列到选区",
         freezenCancel:"取消冻结",
 
         noSeletionError:"没有选区",
+        rangeRCOverErrorTitle: "冻结提醒",
+        rangeRCOverError: "冻结窗格超过可见范围，会导致无法正常操作，请重新设置冻结区域。"
     },
     sort:{
         "asc":"升序",
@@ -9531,7 +9533,9 @@ export default {
         filiterInputNone:"无",
 
         filiterInputTip:"输入筛选值",
+        filiterRangeStart:"从",
         filiterRangeStartTip:"范围开始",
+        filiterRangeEnd:"到",
         filiterRangeEndTip:"范围结束",
 
         filterValueByAllBtn:"全选",
@@ -10020,6 +10024,7 @@ export default {
         tooltipInfo5: '文本内容不能为空',
         tooltipInfo6: '输入的值不是日期类型',
         tooltipInfo7: '日期2不能小于日期1',
+        textlengthInteger: '文本长度必须是大于等于0的整数',
     },
     formula:{
         sum:"求和",
@@ -10115,6 +10120,11 @@ export default {
         pasteMustKeybordAlert:"Copy and paste in the Sheet: Ctrl + C to copy, Ctrl + V to paste, Ctrl + X to cut",
         pasteMustKeybordAlertHTMLTitle:"Copy and paste in the Sheet",
         pasteMustKeybordAlertHTML:"<span style='line-height: 1.0;font-size:36px;font-weight: bold;color:#666;'>Ctrl + C</span>&nbsp;&nbsp;to copy<br/><span style='line-height: 1.0;font-size:36px;font-weight: bold;color:#666;'>Ctrl + V</span>&nbsp;&nbsp;to paste<br/><span style='line-height: 1.0;font-size:36px;font-weight: bold;color:#666;'>Ctrl + X</span>&nbsp;&nbsp;to cut",
+    },
+    paste: {
+        warning:"提示",
+        errorNotAllowMulti:"不能对多重选择区域执行此操作，请选择单个区域，然后再试",
+        errorNotAllowMerged:"不能对合并单元格做部分更改",
     },
     pivotTable:{
         title:"数据透视表",

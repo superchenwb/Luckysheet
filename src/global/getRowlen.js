@@ -87,7 +87,7 @@ function rowlenByRange(d, r1, r2, cfg) {
         if(currentRowLen != Store.defaultrowlen){
             cfg_clone["rowlen"][r] = currentRowLen;
         }else{
-            if(cfg["rowlen"][r]){
+            if(cfg["rowlen"]?.[r]){
                 cfg_clone["rowlen"][r] = cfg["rowlen"][r]
             }
         }
@@ -114,6 +114,10 @@ function computeRowlenByContent(d, r) {
             if (1 !== cell.mc.rs) {
                 continue;
             }
+        }
+
+        if(Store.config["colhidden"] != null && Store.config["colhidden"][c] != null){
+            continue;
         }
 
 
@@ -144,7 +148,7 @@ function computeRowlenByContent(d, r) {
 
 function computeCellWidth(cell, col_index) {
     let colLocationArr = colLocationByIndex(col_index);
-    if (cell.mc && cell.mc.c !== cell.mc.cs) {
+    if (cell.mc && 1 !== cell.mc.cs) {
         colLocationArr = colSpanLocationByIndex(col_index, cell.mc.cs);
     }
 

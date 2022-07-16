@@ -8878,7 +8878,7 @@ export default {
         textWrapMode: 'Text wrap mode',
         textRotate: 'Text rotate',
         textRotateMode: 'Text rotate mode',
-        freezeTopRow: 'Freeze top row',
+        freezeTopRow: 'Freeze first row',
         sortAndFilter: 'Sort and filter',
         findAndReplace: 'Find and replace',
         sum: 'SUM',
@@ -9265,7 +9265,8 @@ export default {
         freezenRCRange:"Freezen both range",
         freezenCancel:"Cancel",
 
-        noSeletionError:"No Range to be selected",
+        noSeletionError:"No Range to be selected",        rangeRCOverErrorTitle: "Freeze reminder",
+        rangeRCOverError: "The frozen pane is beyond the visible range, which will lead to abnormal operation. Please reset the frozen area."
     },
     sort:{
         "asc":"Ascending ",
@@ -9303,7 +9304,9 @@ export default {
        filiterInputNone:"None",
 
        filiterInputTip:"Enter filter value",
+       filiterRangeStart:"",
        filiterRangeStartTip:"Value for formula",
+       filiterRangeEnd:"and",
        filiterRangeEndTip:"Value for formula",
 
        filterValueByAllBtn:"Check all",
@@ -9792,6 +9795,7 @@ export default {
         tooltipInfo5: 'The text content cannot be empty',
         tooltipInfo6: 'The value entered is not a date type',
         tooltipInfo7: 'Date 2 cannot be less than date 1',
+        textlengthInteger: 'Text length must be an integer greater than or equal to 0',
     },
     formula:{
         sum:"Sum",
@@ -9884,9 +9888,14 @@ export default {
         notLessOne:"The number of rows and columns cannot be less than 1",
         offsetColumnLessZero:"The offset column cannot be negative!",
 
-        pasteMustKeybordAlert:"在表格中进行复制粘贴: Ctrl + C 进行复制, Ctrl + V 进行粘贴, Ctrl + X 进行剪切",
-        pasteMustKeybordAlertHTMLTitle:"在表格中进行复制粘贴",
-        pasteMustKeybordAlertHTML:"<span style='line-height: 1.0;font-size:36px;font-weight: bold;color:#666;'>Ctrl + C</span>&nbsp;&nbsp;进行复制<br/><span style='line-height: 1.0;font-size:36px;font-weight: bold;color:#666;'>Ctrl + V</span>&nbsp;&nbsp;进行粘贴<br/><span style='line-height: 1.0;font-size:36px;font-weight: bold;color:#666;'>Ctrl + X</span>&nbsp;&nbsp;进行剪切",
+        pasteMustKeybordAlert:"Copy and paste in the Sheet: Ctrl + C to copy, Ctrl + V to paste, Ctrl + X to cut",
+        pasteMustKeybordAlertHTMLTitle:"Copy and paste in the Sheet",
+        pasteMustKeybordAlertHTML:"<span style='line-height: 1.0;font-size:36px;font-weight: bold;color:#666;'>Ctrl + C</span>&nbsp;&nbsp;to copy<br/><span style='line-height: 1.0;font-size:36px;font-weight: bold;color:#666;'>Ctrl + V</span>&nbsp;&nbsp;to paste<br/><span style='line-height: 1.0;font-size:36px;font-weight: bold;color:#666;'>Ctrl + X</span>&nbsp;&nbsp;to cut",
+    },
+    paste: {
+        warning:"Warning",
+        errorNotAllowMulti:"Cannot perform this operation on multiple selection areas, please select a single range and try again",
+        errorNotAllowMerged:"Cannot make partial changes to merged cells",
     },
     pivotTable:{
         title:"Pivot Table",

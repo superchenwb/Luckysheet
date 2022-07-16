@@ -325,6 +325,13 @@ const luckysheetformula = {
         if (typeof str !== 'string') return str;
         return str.replace(/<script>/g, '&lt;script&gt;').replace(/<\/script>/, '&lt;/script&gt;');
     },
+    ltGtSignDeal: function (str) {
+        if (typeof str !== 'string') return str;
+        if (str.substr(0, 5) === "<span" || str.startsWith('=')) {
+            return str
+        }
+        return str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    },
     fucntionboxshow: function(r, c) {
 
         if (!checkProtectionCellHidden(r, c, Store.currentSheetIndex)) {
@@ -992,7 +999,7 @@ const luckysheetformula = {
         let _this = this;
 
         if ($("#luckysheet-formula-search-c").length == 0) {
-            $("body").append(_this.searchHTML);
+            $("body").first().append(_this.searchHTML);
             $("#luckysheet-formula-search-c").on("mouseover", ".luckysheet-formula-search-item", function () {
                 $("#luckysheet-formula-search-c").find(".luckysheet-formula-search-item").removeClass("luckysheet-formula-search-item-active");
                 $(this).addClass("luckysheet-formula-search-item-active");
@@ -1114,7 +1121,7 @@ const luckysheetformula = {
         let _locale = locale();
         let locale_formulaMore = _locale.formulaMore;
         if ($("#luckysheet-formula-help-c").length == 0) {
-            $("body").after(replaceHtml(_this.helpHTML, {
+            $("body").first().after(replaceHtml(_this.helpHTML, {
                 helpClose: locale_formulaMore.helpClose,
                 helpCollapse: locale_formulaMore.helpCollapse,
                 helpExample: locale_formulaMore.helpExample,
@@ -1562,7 +1569,9 @@ const luckysheetformula = {
             cfg["rowlen"] = {};
         }
 
-        if ((d[r][c].tb == "2" && d[r][c].v != null) || isInlineStringCell(d[r][c])) {//自动换行
+        // 单元格行高自适应,只有在单元格不是合并单元格时才能生效
+        if ((d[r][c].tb == "2" && d[r][c].v != null) || isInlineStringCell(d[r][c]) && (typeof d[r][c]['mc'] == 'undefined')) {
+            //自动换行
             let defaultrowlen = Store.defaultrowlen;
 
             let canvas = $("#luckysheetTableContent").get(0).getContext("2d");
@@ -3405,10 +3414,12 @@ const luckysheetformula = {
 
                     }
                     else {
+                        value = _this.ltGtSignDeal(value);
                         $copy.html(value);
                     }
                 }
                 else {
+                    value = _this.ltGtSignDeal(value);
                     $copy.html(value);
                 }
             }

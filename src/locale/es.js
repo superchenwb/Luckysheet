@@ -9250,6 +9250,8 @@ export default {
         freezenCancel:"Cancelar",
 
         noSeletionError:"No hay rango para seleccionar",
+        rangeRCOverErrorTitle: "Recordatorio de congelación",
+        rangeRCOverError: "El panel de congelación excede el rango visible y puede causar que no funcione correctamente. Reinicie el área de congelación."
     },
     sort:{
         "asc":"Ascendente ",
@@ -9287,7 +9289,9 @@ export default {
        filiterInputNone:"Ninguno",
 
        filiterInputTip:"Introduce valor de filtro",
+       filiterRangeStart:"",
        filiterRangeStartTip:"Valor para fórmula",
+       filiterRangeEnd:"e",
        filiterRangeEndTip:"Valor para fórmula",
 
        filterValueByAllBtn:"Seleccionar todos",
@@ -9760,6 +9764,7 @@ export default {
         tooltipInfo5: 'El contenido del texto no puede estar vacío',
         tooltipInfo6: 'El valor ingresado no es una fecha',
         tooltipInfo7: 'La segunda fecha no puede ser menor que la primera',
+        textlengthInteger: 'La longitud del texto debe ser un entero mayor o igual a 0',
     },
     formula:{
         sum:"Suma",
@@ -9855,6 +9860,11 @@ export default {
         pasteMustKeybordAlert:"在表格中进行复制粘贴: Ctrl + C 进行复制, Ctrl + V 进行粘贴, Ctrl + X 进行剪切",
         pasteMustKeybordAlertHTMLTitle:"在表格中进行复制粘贴",
         pasteMustKeybordAlertHTML:"<span style='line-height: 1.0;font-size:36px;font-weight: bold;color:#666;'>Ctrl + C</span>&nbsp;&nbsp;进行复制<br/><span style='line-height: 1.0;font-size:36px;font-weight: bold;color:#666;'>Ctrl + V</span>&nbsp;&nbsp;进行粘贴<br/><span style='line-height: 1.0;font-size:36px;font-weight: bold;color:#666;'>Ctrl + X</span>&nbsp;&nbsp;进行剪切",
+    },
+    paste: {
+        warning:"Advertencia",
+        errorNotAllowMulti:"No se puede realizar esta operación en varias áreas de selección, selecciona un solo rango y vuelve a intentarlo",
+        errorNotAllowMerged: "No se pueden realizar cambios parciales en las celdas fusionadas",
     },
     pivotTable:{
         title:"Tabla Dinámica",

@@ -74,7 +74,7 @@ const hyperlinkCtrl = {
                             </div>
                         </div>`;
 
-        $("body").append(replaceHtml(modelHTML, { 
+        $("body").first().append(replaceHtml(modelHTML, { 
             "id": "luckysheet-insertLink-dialog", 
             "addclass": "luckysheet-insertLink-dialog", 
             "title": toolbarText.insertLink, 
@@ -353,7 +353,7 @@ const hyperlinkCtrl = {
         //共享编辑模式
         if(server.allowUpdate){ 
             server.saveParam("all", sheetIndex, currentHyperlink, { "k": "hyperlink" });
-            server.historyParam(Store.flowdata, sheetIndex, range);
+            server.historyParam(Store.flowdata, sheetIndex, range[0]);
         }
 
         setTimeout(function () {

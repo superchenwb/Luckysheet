@@ -4,12 +4,12 @@
 
 </div>
 
+# Luckysheet 3.x 目前正在使用Typescript重构
+
 简体中文 | [English](./README.md)
 
 ## 介绍
 🚀Luckysheet ，一款纯前端类似excel的在线表格，功能强大、配置简单、完全开源。
-
-> Luckysheet 3.x 目前正在使用Typescript重构。
 
 ## 相关链接
  | 源码   | 文档 | Demo | 插件Demo | 论坛 |
@@ -28,12 +28,14 @@
 | 工程 | 描述 |
 |---------|-------------|
 | [Luckysheet Vue]          | 在vue cli 3项目中使用Luckysheet和Luckyexcel|
+| [Luckysheet Vue3]          | 在vue3, vite项目中使用Luckysheet和Luckyexcel|
 | [Luckysheet React]          | 在React项目中使用Luckysheet |
 | [Luckyexcel Node]          | 在koa2中使用Luckyexcel |
 | [Luckysheet Server]          | Java后台Luckysheet Server |
 | [Luckysheet Server Starter]          | LuckysheetServer 一键docker部署 |
 
 [Luckysheet Vue]: https://gitee.com/mengshukeji/luckysheet-vue
+[Luckysheet Vue3]: https://gitee.com/hjwforever/luckysheet-vue3-vite.git
 [Luckysheet React]: https://gitee.com/mengshukeji/luckysheet-react
 [Luckyexcel Node]: https://gitee.com/mengshukeji/Luckyexcel-node
 [Luckysheet Server]: https://gitee.com/mengshukeji/LuckysheetServer
@@ -133,9 +135,9 @@ npm run build
 - [Github 论坛](https://github.com/mengshukeji/Luckysheet/discussions)
 - 以下扫码加入官方微信群或者QQ群
 
-| 官方微信群 |  群满则加小编微信，备注:加群  | QQ群 |
-|---|---|---|
-| <img src="https://minio.cnbabylon.com/public/luckysheet/luckysheet_wechat_group.png" width="200" /> | <img src="https://minio.cnbabylon.com/public/luckysheet/dushusir_wechat.jpg" width="200" />| <img src="https://minio.cnbabylon.com/public/luckysheet/luckysheet_qq_group.jpg" width="200" /> |
+|  加小编微信:dushusir2，备注:加群  | QQ群:767964895 |
+|---|---|
+|<img src="https://cdn.jsdelivr.net/gh/mengshukeji/LuckyResources@master/assets/img/wechat/dushusir_wechat.jpg" width="200" />| <img src="https://cdn.jsdelivr.net/gh/mengshukeji/LuckyResources@master/assets/img/wechat/luckysheet_qq_group_2.jpeg" width="200" /> |
 
 
 [英文社群](./README.md)
@@ -150,7 +152,7 @@ Luckysheet是MIT许可的开源项目，其持续稳定的开发离不开这些�
 
 | PayPal |  微信  | 支付宝 |
 |---|---|---|
-| [Paypal Me](https://www.paypal.me/wbfsa) | <img src="https://minio.cnbabylon.com/public/luckysheet/wechat.jpg" width="200" />| <img src="https://minio.cnbabylon.com/public/luckysheet/alipay.jpg" width="200" /> |
+| [Paypal Me](https://www.paypal.me/wbfsa) | <img src="https://cdn.jsdelivr.net/gh/mengshukeji/LuckyResources@master/assets/img/wechat/wechat.jpg" width="200" />| <img src="https://cdn.jsdelivr.net/gh/mengshukeji/LuckyResources@master/assets/img/wechat/alipay.jpg" width="200" /> |
 
 ### Patreon和OpenCollective有什么区别？
 
@@ -203,6 +205,51 @@ Luckysheet是MIT许可的开源项目，其持续稳定的开发离不开这些�
 - *勇 ¥ 10
 - *腾 ¥ 15
 - 名字好难起 ¥ 20
+- 大山 ¥ 1
+- waiting ¥ 1000
+- **宇 ¥ 10.00
+- 刘小帅的哥哥 ¥ 20.00
+- 宁静致远 ¥ 10.00
+- Eleven ¥ 1.00
+- **帆 ¥ 188
+- henry ¥ 100
+- .波罗 ¥ 50
+- 花落有家 ¥ 50
+- 踏遍南水北山 ¥ 1
+- LC ¥ 5
+- **明 ¥ 8.80
+- *军 ¥ 20
+- 张彪 ¥ 50
+- 企业文档云@肖敏 ¥ 10
+- 匿名 ¥ 50
+- 逍遥行 ¥ 10
+- z.wasaki ¥ 50
+- Make Children ¥ 20
+- Foam ¥ 20
+- 奥特曼( o|o)ノ三 ¥ 50
+- **凯 ¥ 10
+- **兵 ¥ 20
+- **川 ¥ 1
+- 二万 ¥ 50
+- 蔚然成林 ¥ 10
+- 邹杰 ¥ 10
+- 张永强 ¥ 50
+- 鱼得水 ¥ 150
+- Ccther ¥ 1
+- Eric Cheng ¥ 10
+- 佚名 ¥ 1
+- 花叶 ¥ 50
+- GT ¥ 20
+- 菜菜心 ¥ 10
+- fisher ¥ 1
+- JC ¥ 5
+- 佚名 ¥ 20
+- 独孤一剑 ¥ 50
+- mxt ¥ 20
+- 一叶迷山 ¥ 100
+- Jeff ¥ 100
+- 八千多条狗🐶 ¥ 100
+- 晓峰 ¥ 10
 
 ## 贡献者和感谢
 

@@ -9089,7 +9089,7 @@ export default {
         textWrapMode       : '換行管道',
         textRotate         : '文字旋轉',
         textRotateMode     : '旋轉管道',
-        freezeTopRow       : '凍結首行',
+        freezeTopRow       : '凍結第一行',
         sortAndFilter      : '排序和篩選',
         findAndReplace     : '查找替換',
         sum                : '求和',
@@ -9476,9 +9476,9 @@ export default {
         "rotationDown": "向下90°"
     },
     freezen: {
-        default           : "凍結首行",
-        freezenRow        : "凍結首行",
-        freezenColumn     : "凍結首列",
+        default           : "凍結第一行",
+        freezenRow        : "凍結第一行",
+        freezenColumn     : "凍結第A列",
         freezenRC         : "凍結行列",
         freezenRowRange   : "凍結行到選區",
         freezenColumnRange: "凍結列到選區",
@@ -9486,6 +9486,8 @@ export default {
         freezenCancel     : "取消凍結",
 
         noSeletionError: "没有選區",
+        rangeRCOverErrorTitle: "凍結提醒",
+        rangeRCOverError: "凍結窗格超過可見範圍，會導致無法正常操作，請重新設定凍結區域。"
     },
     sort: {
         "asc"   : "昇冪",
@@ -9524,7 +9526,9 @@ export default {
         filiterInputNone: "無",
 
         filiterInputTip     : "輸入篩選值",
+        filiterRangeStart   : "從",
         filiterRangeStartTip: "範圍開始",
+        filiterRangeEnd     : "到",
         filiterRangeEndTip  : "範圍结束",
 
         filterValueByAllBtn    : "全選",
@@ -10013,6 +10017,7 @@ export default {
         tooltipInfo5         : '文字內容不能為空',
         tooltipInfo6         : '輸入的值不是日期類型',
         tooltipInfo7         : '日期2不能小於日期1',
+        textlengthInteger    : '文字長度必須是大於等於0的整數',
     },
     formula: {
         sum       : "求和",
@@ -10108,6 +10113,11 @@ export default {
         pasteMustKeybordAlert         : "Copy and paste in the Sheet: Ctrl + C to copy, Ctrl + V to paste, Ctrl + X to cut",
         pasteMustKeybordAlertHTMLTitle: "Copy and paste in the Sheet",
         pasteMustKeybordAlertHTML     : "<span style='line-height: 1.0;font-size:36px;font-weight: bold;color:#666;'>Ctrl + C</span>&nbsp;&nbsp;to copy<br/><span style='line-height: 1.0;font-size:36px;font-weight: bold;color:#666;'>Ctrl + V</span>&nbsp;&nbsp;to paste<br/><span style='line-height: 1.0;font-size:36px;font-weight: bold;color:#666;'>Ctrl + X</span>&nbsp;&nbsp;to cut",
+    },
+    paste: {
+        warning            : "提示",
+        errorNotAllowMulti : "不能對多重選擇區域執行此操作,請選擇單個區域,然後再試",
+        errorNotAllowMerged: "不能对合并单元格做部分更改",
     },
     pivotTable: {
         title                : "數據透視錶",

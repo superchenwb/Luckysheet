@@ -9,13 +9,13 @@
 
 </div>
 
+# Luckysheet 3.x is currently being rewritten in Typescript
 
 English| [简体中文](./README-zh.md)
 
 ## Introduction
 🚀Luckysheet is an online spreadsheet like excel that is powerful, simple to configure, and completely open source.
 
-> Luckysheet 3.x is currently being rewritten in Typescript.
 
 ## Links
  | Source Code   | Documentation | Demo | Plugins Demo | Forum |
@@ -34,12 +34,14 @@ English| [简体中文](./README-zh.md)
 | Project | Description |
 |---------|-------------|
 | [Luckysheet Vue]          | Luckysheet and Luckyexcel in a vue cli3 project |
+| [Luckysheet Vue3]          | Luckysheet and Luckyexcel in a vue3 project with vite|
 | [Luckysheet React]          | Luckysheet in a React project |
 | [Luckyexcel Node]          | Use Luckyexcel in koa2 |
 | [Luckysheet Server]          | Java backend Luckysheet Server |
 | [Luckysheet Server Starter]          | LuckysheetServer docker deployment startup template |
 
 [Luckysheet Vue]: https://github.com/mengshukeji/luckysheet-vue
+[Luckysheet Vue3]: https://github.com/hjwforever/luckysheet-vue3-vite
 [Luckysheet React]: https://github.com/mengshukeji/luckysheet-react
 [Luckyexcel Node]: https://github.com/mengshukeji/Luckyexcel-node
 [Luckysheet Server]: https://github.com/mengshukeji/LuckysheetServer
@@ -150,7 +152,7 @@ Luckysheet is an MIT-licensed open source project with its ongoing development m
 
 | PayPal |  WeChat  | Alipay |
 |---|---|---|
-| [Paypal Me](https://www.paypal.me/wbfsa) | <img src="https://minio.cnbabylon.com/public/luckysheet/wechat.jpg" width="140" />| <img src="https://minio.cnbabylon.com/public/luckysheet/alipay.jpg" width="130" /> |
+| [Paypal Me](https://www.paypal.me/wbfsa) | <img src="https://cdn.jsdelivr.net/gh/mengshukeji/LuckyResources@master/assets/img/wechat/wechat.jpg" width="140" />| <img src="https://cdn.jsdelivr.net/gh/mengshukeji/LuckyResources@master/assets/img/wechat/alipay.jpg" width="130" /> |
 
 ### What's the difference between Patreon and OpenCollective?
 
@@ -203,6 +205,51 @@ Funds donated via Patreon go directly to support mengshukeji's work on Luckyshee
 - *勇 ¥ 10
 - *腾 ¥ 15
 - 名字好难起 ¥ 20
+- 大山 ¥ 1
+- waiting ¥ 1000
+- **宇 ¥ 10.00
+- 刘小帅的哥哥 ¥ 20.00
+- 宁静致远 ¥ 10.00
+- Eleven ¥ 1.00
+- **帆 ¥ 188
+- henry ¥ 100
+- .波罗 ¥ 50
+- 花落有家 ¥ 50
+- 踏遍南水北山 ¥ 1
+- LC ¥ 5
+- **明 ¥ 8.80
+- *军 ¥ 20
+- 张彪 ¥ 50
+- 企业文档云@肖敏 ¥ 10
+- 匿名 ¥ 50
+- 逍遥行 ¥ 10
+- z.wasaki ¥ 50
+- Make Children ¥ 20
+- Foam ¥ 20
+- 奥特曼( o|o)ノ三 ¥ 50
+- **凯 ¥ 10
+- **兵 ¥ 20
+- **川 ¥ 1
+- 二万 ¥ 50
+- 蔚然成林 ¥ 10
+- 邹杰 ¥ 10
+- 张永强 ¥ 50
+- 鱼得水 ¥ 50
+- Ccther ¥ 1
+- Eric Cheng ¥ 10
+- 佚名 ¥ 1
+- 花叶 ¥ 50
+- GT ¥ 20
+- 菜菜心 ¥ 10
+- fisher ¥ 1
+- JC ¥ 5
+- 佚名 ¥ 20
+- 独孤一剑 ¥ 50
+- mxt ¥ 20
+- 一叶迷山 ¥ 100
+- Jeff ¥ 100
+- 八千多条狗🐶 ¥ 100
+- 晓峰 ¥ 10
 
 ## Authors and acknowledgment
 

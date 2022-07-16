@@ -304,7 +304,7 @@ const luckysheetDropCell = {
             $("#luckysheet-dropCell-typeList").remove();
             const _locale = locale();
             const locale_dropCell = _locale.dropCell;
-            $("body").append(replaceHtml(_this.typeListHtml,{
+            $("body").first().append(replaceHtml(_this.typeListHtml,{
                 copyCell:locale_dropCell.copyCell,
                 sequence:locale_dropCell.sequence,
                 onlyFormat:locale_dropCell.onlyFormat,
@@ -680,7 +680,7 @@ const luckysheetDropCell = {
                             let f = "=" + formula.functionCopy(cell.f, "right", j - apply_str_c + 1);
                             let v = formula.execfunction(f, i, j);
 
-                            formula.execFunctionGroup(j, i, v[1], undefined, d);
+                            formula.execFunctionGroup(i, j, v[1], undefined, d);
 
                             cell.f = v[2];
                             cell.v = v[1];
@@ -769,7 +769,7 @@ const luckysheetDropCell = {
                             let f = "=" + formula.functionCopy(cell.f, "left", apply_end_c - j + 1);
                             let v = formula.execfunction(f, i, j);
 
-                            formula.execFunctionGroup(j, i, v[1], undefined, d);
+                            formula.execFunctionGroup(i, j, v[1], undefined, d);
 
                             cell.f = v[2];
                             cell.v = v[1];

@@ -226,7 +226,7 @@ const dataVerificationCtrl = {
                             </div>
                         </div>`;
 
-        $("body").append(replaceHtml(modelHTML, { 
+        $("body").first().append(replaceHtml(modelHTML, { 
             "id": "luckysheet-dataVerification-dialog", 
             "addclass": "luckysheet-dataVerification-dialog", 
             "title": toolbarText.dataVerification, 
@@ -713,11 +713,20 @@ const dataVerificationCtrl = {
                     return;
                 }
 
+                if (!Number.isInteger(Number(value1)) || Number(value1) < 0) {
+                    tooltip.info('<i class="fa fa-exclamation-triangle"></i>', dvText.textlengthInteger);
+                    return;
+                }
+
                 if(type2 == 'bw' || type2 == 'nb'){
                     value2 = $("#luckysheet-dataVerification-dialog .show-box-item-textLength .input:visible .data-verification-value2").val().trim();
                 
                     if(!isRealNum(value2)){
                         tooltip.info('<i class="fa fa-exclamation-triangle"></i>', dvText.tooltipInfo3);
+                        return;
+                    }
+                    if (!Number.isInteger(Number(value2)) || Number(value2) < 0) {
+                        tooltip.info('<i class="fa fa-exclamation-triangle"></i>', dvText.textlengthInteger);
                         return;
                     }
 
@@ -956,7 +965,7 @@ const dataVerificationCtrl = {
         $("#luckysheet-modal-dialog-mask").hide();
         $("#luckysheet-dataVerificationRange-dialog").remove();
 
-        $("body").append(replaceHtml(modelHTML, { 
+        $("body").first().append(replaceHtml(modelHTML, { 
             "id": "luckysheet-dataVerificationRange-dialog", 
             "addclass": "luckysheet-dataVerificationRange-dialog", 
             "title": dvText.selectCellRange, 

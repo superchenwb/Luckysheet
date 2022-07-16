@@ -45,7 +45,7 @@ import {
     mouseposition 
 } from '../global/location';
 import { rowlenByRange } from '../global/getRowlen';
-import { isRealNull, hasPartMC, isEditMode } from '../global/validate';
+import { isRealNull, hasPartMC, isEditMode, checkIsAllowEdit } from '../global/validate';
 import { countfunc } from '../global/count';
 import browser from '../global/browser';
 import formula from '../global/formula';
@@ -1476,13 +1476,7 @@ export default function luckysheetHandler() {
             if(!checkProtectionAuthorityNormal(Store.currentSheetIndex, "editObjects")){
                 return;
             }
-            let render = new FileReader();
-            render.readAsDataURL(files[0]);
-
-            render.onload = function(event){
-                let src = event.target.result;
-                imageCtrl.inserImg(src);
-            }
+            imageCtrl.insertImg(files[0]);
         }
         handleCellDragStopEvent(e);
     }, false);
@@ -3174,17 +3168,20 @@ export default function luckysheetHandler() {
                         "left": left,
                         "top": top
                     });
+
+                    let imageUrlHandle = Store.toJsonOptions && Store.toJsonOptions['imageUrlHandle'];
+                    let imgSrc = typeof imageUrlHandle === 'function' ? imageUrlHandle(imgItem.src) : imgItem.src;
         
                     $("#luckysheet-modal-dialog-cropping .cropping-mask").css({
                         "width": imgItem.default.width,
                         "height": imgItem.default.height,
-                        "background-image": "url(" + imgItem.src + ")",
+                        "background-image": "url(" + imgSrc + ")",
                         "left": -offsetLeft,
                         "top": -offsetTop
                     })
         
                     $("#luckysheet-modal-dialog-cropping .cropping-content").css({
-                        "background-image": "url(" + imgItem.src + ")",
+                        "background-image": "url(" + imgSrc + ")",
                         "background-size": imgItem.default.width + "px " + imgItem.default.height + "px",
                         "background-position": -offsetLeft + "px " + -offsetTop + "px"
                     })
@@ -3574,7 +3571,7 @@ export default function luckysheetHandler() {
 
             d[ps_r][ps_c].ps.left = luckysheetPostil.currentObj.position().left;
             d[ps_r][ps_c].ps.top = luckysheetPostil.currentObj.position().top;
-            d[ps_r][ps_c].ps.value = luckysheetPostil.currentObj.find(".formulaInputFocus").text();
+            d[ps_r][ps_c].ps.value = luckysheetPostil.currentObj.find(".formulaInputFocus").html().replaceAll('<div>', '\n').replaceAll(/<(.*)>.*?|<(.*) \/>/g, '').trim();
 
             rc.push(ps_r + "_" + ps_c);
 
@@ -3608,7 +3605,7 @@ export default function luckysheetHandler() {
             d[ps_r][ps_c].ps.top = luckysheetPostil.currentObj.position().top;
             d[ps_r][ps_c].ps.width = luckysheetPostil.currentObj.outerWidth();
             d[ps_r][ps_c].ps.height = luckysheetPostil.currentObj.outerHeight();
-            d[ps_r][ps_c].ps.value = luckysheetPostil.currentObj.find(".formulaInputFocus").text();
+            d[ps_r][ps_c].ps.value = luckysheetPostil.currentObj.find(".formulaInputFocus").html().replaceAll('<div>', '\n').replaceAll(/<(.*)>.*?|<(.*) \/>/g, '').trim();
 
             rc.push(ps_r + "_" + ps_c);
 
@@ -4866,6 +4863,11 @@ export default function luckysheetHandler() {
 
     //菜单栏 插入图片按钮
     $("#luckysheet-insertImg-btn-title").click(function () {
+        // *如果禁止前台编辑，则中止下一步操作
+        if (!checkIsAllowEdit()) {
+            tooltip.info("", locale().pivotTable.errorNotAllowEdit);
+            return
+        }
         if(!checkProtectionAuthorityNormal(Store.currentSheetIndex, "editObjects")){
             return;
         }
@@ -4886,18 +4888,16 @@ export default function luckysheetHandler() {
             return;
         }
         let file = e.currentTarget.files[0];
-        let render = new FileReader();
-        render.readAsDataURL(file);
-
-        render.onload = function(event){
-            let src = event.target.result;
-            imageCtrl.inserImg(src);
-            $("#luckysheet-imgUpload").val("");
-        }
+        imageCtrl.insertImg(file);
     });
 
     //菜单栏 插入链接按钮
     $("#luckysheet-insertLink-btn-title").click(function () {
+        // *如果禁止前台编辑，则中止下一步操作
+        if (!checkIsAllowEdit()) {
+            tooltip.info("", locale().pivotTable.errorNotAllowEdit);
+            return
+        }
         if(!checkProtectionNotEnable(Store.currentSheetIndex)){
             return;
         }
@@ -4956,6 +4956,8 @@ export default function luckysheetHandler() {
             }
 
             luckysheetFreezen.scrollAdapt();
+            // cancel 之后 勾勾取消
+            $('#luckysheet-icon-freezen-menu-menuButton').find('.fa.fa-check').remove();
         }
         else {
 
@@ -5288,9 +5290,9 @@ export default function luckysheetHandler() {
             if (txtdata.indexOf("luckysheet_copy_action_table") > - 1 && Store.luckysheet_copy_save["copyRange"] != null && Store.luckysheet_copy_save["copyRange"].length > 0) {
                 //剪贴板内容解析
                 let cpDataArr = [];
-
-                let reg = new RegExp('<tr.*?>(.*?)</tr>', 'g');
-                let reg2 = new RegExp('<td.*?>(.*?)</td>', 'g');
+                
+                let reg = new RegExp('<tr.*?>(.*?)</tr>', 'gs');
+                let reg2 = new RegExp('<td.*?>(.*?)</td>', 'gs');
 
                 let regArr = txtdata.match(reg) || [];
 
@@ -5301,7 +5303,7 @@ export default function luckysheetHandler() {
 
                     if (reg2Arr != null) {
                         for (let j = 0; j < reg2Arr.length; j++) {
-                            let cpValue = reg2Arr[j].replace(/<td.*?>/g, "").replace(/<\/td>/g, "");
+                            let cpValue = reg2Arr[j].replace(/<td.*?>/gs, "").replace(/<\/td>/gs, "");
                             cpRowArr.push(cpValue);
                         }
                     }
@@ -5404,7 +5406,8 @@ export default function luckysheetHandler() {
 
                     let data = new Array($("#luckysheet-copy-content").find("table tr").length);
                     let colLen = 0;
-                    $("#luckysheet-copy-content").find("table tr").eq(0).find("td").each(function () {
+                    const cellElements = "th, td";
+                    $("#luckysheet-copy-content").find("table tr").eq(0).find(cellElements).each(function () {
                         let colspan = parseInt($(this).attr("colspan"));
                         if (isNaN(colspan)) {
                             colspan = 1;
@@ -5421,7 +5424,7 @@ export default function luckysheetHandler() {
                     $("#luckysheet-copy-content").find("table tr").each(function () {
                         let $tr = $(this);
                         let c = 0;
-                        $tr.find("td").each(function () {
+                        $tr.find(cellElements).each(function () {
                             let $td = $(this);
                             let cell = {};
                             let txt = $td.text();
@@ -5451,6 +5454,12 @@ export default function luckysheetHandler() {
                                 cell.bl = 1;
                             }
 
+                            // 检测下划线
+                            let un = $td.css('text-decoration')
+                            if (un.indexOf('underline') != -1) {
+                              cell.un = 1;
+                            }
+                            
                             let it = $td.css("font-style");
                             if (it == "normal") {
                                 cell.it = 0;
@@ -5478,6 +5487,7 @@ export default function luckysheetHandler() {
                             let fc = $td.css("color");
                             cell.fc = fc;
 
+                            // 水平对齐属性
                             let ht = $td.css("text-align");
                             if (ht == "center") {
                                 cell.ht = 0;
@@ -5489,6 +5499,7 @@ export default function luckysheetHandler() {
                                 cell.ht = 1;
                             }
 
+                            // 垂直对齐属性
                             let vt = $td.css("vertical-align");
                             if (vt == "middle") {
                                 cell.vt = 0;
@@ -5620,12 +5631,7 @@ export default function luckysheetHandler() {
                 }
                 //复制的是图片
                 else if(clipboardData.files.length == 1 && clipboardData.files[0].type.indexOf('image') > -1){
-                    let render = new FileReader();
-                    render.readAsDataURL(clipboardData.files[0]);
-                    render.onload = function(event){
-                        let src = event.target.result;
-                        imageCtrl.inserImg(src);
-                    }
+                    imageCtrl.insertImg(clipboardData.files[0]);
 
                     return;
                 }

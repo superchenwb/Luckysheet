@@ -73,12 +73,22 @@ export function getCellValue(row, column, options = {}) {
         else if(type == "f") {
             return_v = cellData["v"];
         }
-        else if(cellData && cellData.ct && cellData.ct.fa == 'yyyy-MM-dd') {
-            return_v = cellData.m;
+        else if(cellData && cellData.ct ) {
+            if (cellData.ct.fa == 'yyyy-MM-dd') {
+                return_v = cellData.m;
+            }
+            // 修复当单元格内有换行获取不到值的问题
+            else if (cellData.ct.hasOwnProperty("t") && cellData.ct.t === 'inlineStr') {
+                let inlineStrValueArr = cellData.ct.s;
+                if (inlineStrValueArr) {
+                    return_v =  inlineStrValueArr.map(i => i.v).join("")
+                }
+            }
         }
+
     }
 
-    if(return_v == undefined){
+    if(return_v == undefined ){
         return_v = null;
     }
 
@@ -609,21 +619,34 @@ export function frozenFirstRow(order) {
 
     // 冻结为当前sheet页
     if (!order || order == getSheetIndex(Store.currentSheetIndex)) {
-        let scrollTop = $("#luckysheet-cell-main").scrollTop();
+        let freezenhorizontaldata, row_st, top;
+        if (luckysheetFreezen.freezenRealFirstRowColumn) {
+            let row_st = 0;
+            top = Store.visibledatarow[row_st] - 2 + Store.columnHeaderHeight;
+            freezenhorizontaldata = [
+                Store.visibledatarow[row_st],
+                row_st + 1,
+                0,
+                luckysheetFreezen.cutVolumn(Store.visibledatarow, row_st + 1),
+                top
+            ];
+        } else {
+            let scrollTop = $("#luckysheet-cell-main").scrollTop();
+            row_st = luckysheet_searcharray(Store.visibledatarow, scrollTop);
+            if(row_st == -1){
+                row_st = 0;
+            }
 
-        let row_st = luckysheet_searcharray(Store.visibledatarow, scrollTop);
-        if(row_st == -1){
-            row_st = 0;
+            top = Store.visibledatarow[row_st] - 2 - scrollTop + Store.columnHeaderHeight;
+            freezenhorizontaldata = [
+                Store.visibledatarow[row_st],
+                row_st + 1,
+                scrollTop,
+                luckysheetFreezen.cutVolumn(Store.visibledatarow, row_st + 1),
+                top
+            ];
         }
 
-        let top = Store.visibledatarow[row_st] - 2 - scrollTop + Store.columnHeaderHeight;
-        let freezenhorizontaldata = [
-            Store.visibledatarow[row_st],
-            row_st + 1,
-            scrollTop,
-            luckysheetFreezen.cutVolumn(Store.visibledatarow, row_st + 1),
-            top
-        ];
         luckysheetFreezen.saveFreezen(freezenhorizontaldata, top, null, null);
 
         if (luckysheetFreezen.freezenverticaldata != null) {
@@ -649,21 +672,35 @@ export function frozenFirstColumn(order) {
 
     // 冻结为当前sheet页
     if (!order || order == getSheetIndex(Store.currentSheetIndex)) {
-        let scrollLeft = $("#luckysheet-cell-main").scrollLeft();
-
-        let col_st = luckysheet_searcharray(Store.visibledatacolumn, scrollLeft);
-        if(col_st == -1){
+        let freezenverticaldata, col_st, left;
+        if (luckysheetFreezen.freezenRealFirstRowColumn) {
             col_st = 0;
+            left = Store.visibledatacolumn[col_st] - 2 + Store.rowHeaderWidth;
+            freezenverticaldata = [
+                Store.visibledatacolumn[col_st],
+                col_st + 1,
+                0,
+                luckysheetFreezen.cutVolumn(Store.visibledatacolumn, col_st + 1),
+                left
+            ];
+        } else {
+            let scrollLeft = $("#luckysheet-cell-main").scrollLeft();
+
+            col_st = luckysheet_searcharray(Store.visibledatacolumn, scrollLeft);
+            if(col_st == -1){
+                col_st = 0;
+            }
+
+            left = Store.visibledatacolumn[col_st] - 2 - scrollLeft + Store.rowHeaderWidth;
+            freezenverticaldata = [
+                Store.visibledatacolumn[col_st],
+                col_st + 1,
+                scrollLeft,
+                luckysheetFreezen.cutVolumn(Store.visibledatacolumn, col_st + 1),
+                left
+            ];
         }
 
-        let left = Store.visibledatacolumn[col_st] - 2 - scrollLeft + Store.rowHeaderWidth;
-        let freezenverticaldata = [
-            Store.visibledatacolumn[col_st],
-            col_st + 1,
-            scrollLeft,
-            luckysheetFreezen.cutVolumn(Store.visibledatacolumn, col_st + 1),
-            left
-        ];
         luckysheetFreezen.saveFreezen(null, null, freezenverticaldata, left);
 
         if (luckysheetFreezen.freezenhorizontaldata != null) {
@@ -1635,7 +1672,8 @@ export function getDefaultRowHeight(options = {}) {
         }
     }, 1)
 
-    return Store.luckysheetfile[order].defaultRowHeight;
+    // *返回指定的工作表默认行高，如果未配置就返回全局的默认行高
+    return Store.luckysheetfile[order].defaultRowHeight || Store.defaultrowlen;
 }
 
 
@@ -1657,7 +1695,8 @@ export function getDefaultColWidth(options = {}) {
         }
     }, 1)
 
-    return Store.luckysheetfile[order].defaultColWidth;
+    // *返回指定的工作表默认列宽，如果未配置就返回全局的默认列宽
+    return Store.luckysheetfile[order].defaultColWidth || Store.defaultcollen;
 }
 
 
@@ -4939,6 +4978,7 @@ export function setSheetAdd(options = {}) {
     if (success && typeof success === 'function') {
         success();
     }
+    return sheetconfig;
 }
 
 
