@@ -8890,6 +8890,8 @@ export default {
 
         cellFormat:"Configuración formato de celda",
         print:"Imprimir",
+        upload: "Upload",
+        download: "Download"
     },
     alternatingColors:{
         applyRange: 'Aplicar a rango',

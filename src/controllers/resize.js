@@ -158,9 +158,7 @@ export default function luckysheetsizeauto(isRefreshCanvas=true) {
         }
 
     }
-
     if(ismore){
-
         $("#luckysheet-wa-editor").append(morebtn);
         $("#luckysheet-icon-morebtn").click(function(){
 

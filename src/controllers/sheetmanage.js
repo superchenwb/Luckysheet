@@ -405,7 +405,6 @@ const sheetmanage = {
 
         let btn = [];
         Store.luckysheetfile.sort(_this.ordersheet('order'));
-
         for (let i = 0; i < Store.luckysheetfile.length; i++) {
             let display = "";
             let sheetIndex = Store.luckysheetfile[i].index;
@@ -435,7 +434,7 @@ const sheetmanage = {
             $("#luckysheet-cell-main").append('<div ' + display + ' id="luckysheet-datavisual-selection-set-' + sheetIndex + '" class="luckysheet-datavisual-selection-set"></div>');
         }
 
-        $("#luckysheet-sheet-container-c").append(btn.join(""));
+        $("#luckysheet-sheet-container-c").html(btn.join(""));
 
         _this.locationSheet();
     },
@@ -1095,6 +1094,7 @@ const sheetmanage = {
     mergeCalculationSheet:{},
     mergeCalculation:function(index){
         let file = Store.luckysheetfile[this.getSheetIndex(index)];
+        if(!file) return;
         let config = file.config, data = file.data;
         if(config==null){
             return;

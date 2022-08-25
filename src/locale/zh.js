@@ -9116,6 +9116,8 @@ export default {
 
         cellFormat:"设置单元格格式",
         print:"打印",
+        upload: "上传",
+        download: "下载"
     },
     alternatingColors:{
         applyRange: '应用范围',

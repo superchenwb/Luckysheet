@@ -1,26 +1,32 @@
-import { seriesLoadScripts, loadLinks, $$ } from '../../utils/util'
-
+import { seriesLoadScripts, loadLinks } from '../../utils/util';
+import { getScreenshot } from '../../global/api';
 
 // Dynamically load dependent scripts and styles
 const dependScripts = [
-    // 'expendPlugins/chart/chartmix.umd.min.js',
-    'http://localhost:8080/luckysheetPluginPrint.umd.js',
-]
+  'luckysheet/expendPlugins/print/print.min.js',
+  //   'https://printjs-4de6.kxcdn.com/print.min.js',
+];
 
 const dependLinks = [
-    // 'expendPlugins/chart/chartmix.css',
-    'http://localhost:8080/luckysheetPluginPrint.css',
-]
+  //   'https://printjs-4de6.kxcdn.com/print.min.css',
+  'luckysheet/expendPlugins/print/print.min.css',
+];
 
-// Initialize the chart component
+// Initialize the print component
 function print(data, isDemo) {
-    loadLinks(dependLinks);
+  loadLinks(dependLinks);
 
-    seriesLoadScripts(dependScripts, null, function () {
-        
-    });
+  seriesLoadScripts(dependScripts, null, function() {});
 }
 
+function onClickPrint(type) {
+  if (type === 'print') {
+    // 1. 实现全选
+    $('#luckysheet-left-top').click();
+  }
+  // 2. 生成选区的截图
+  const src = getScreenshot();
+  window.printJS({ printable: src, type: 'image', base64: true });
+}
 
-
-export { print }
+export { print, onClickPrint };
