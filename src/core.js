@@ -167,7 +167,7 @@ luckysheet.create = function (setting) {
     //loading
     const loadingObj=luckysheetlodingHTML("#" + container)
     Store.loadingObj=loadingObj
-
+    console.log('---loadurl', loadurl)
     if (loadurl == "") {
         sheetmanage.initialjfFile(menu, title);
         // luckysheetsizeauto();
