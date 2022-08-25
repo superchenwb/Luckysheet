@@ -184,7 +184,11 @@ const sheetmanage = {
       let hasActive = false,
         indexs = [];
       // 第一个非隐藏的index
-      let index = Store.luckysheetfile.filter(item => !item.hide)[0].order;
+      const first = Store.luckysheetfile.filter(item => !item.hide)[0];
+      let index = 0;
+      if (first) {
+        index = Store.luckysheetfile.filter(item => !item.hide)[0].order;
+      }
 
       Store.luckysheetfile.forEach(item => {
         if ('undefined' === typeof item.index) {
